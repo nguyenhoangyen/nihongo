@@ -1,7 +1,7 @@
 class Card < ActiveRecord::Base
   belongs_to :deck
 
-  attr_accessible :content
+  attr_accessor :content
   
   acts_as_list :scope => :deck
   

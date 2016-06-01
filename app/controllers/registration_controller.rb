@@ -15,17 +15,19 @@ class RegistrationController < ApplicationController
 	end
 
   def create
-    @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-      	UserMailer.registration( @user ).deliver
-      	flash.now.notice = 'Check your Email!  We just sent you a link to verify your email address.'
-        format.html { redirect_to root_url }
+    if @user.save
+      UserMailer.registration( @user ).deliver
+      respond_to do |format|
+        flash.now.notice = 'Check your Email!  We just sent you a link to verify your email address.'
+        format.html { redirect_to root_url  }
         format.json { render json: @user, status: :created, location: @user }
         logger.info "***************Rendering create after save*******************"
         format.js
-      else
+      end
+    else
+      respond_to do |format|
         flash.now.alert = @user.errors.full_messages.delete_if {|msg| msg.index(/digest/)}.join( ', ' )
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -55,7 +57,7 @@ class RegistrationController < ApplicationController
     old_email = @user.email
 
     respond_to do |format|
-      if @user.update_attributes( {email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation]} )
+      if @user.update_attributes(user_params)
         
         msg = ""
         unless old_email == @user.email
@@ -72,6 +74,11 @@ class RegistrationController < ApplicationController
       end
     end
   end
+
+  private
+    def user_params
+      params.require(:person).permit(:email, :password, :password_confirmation)
+    end
 end
 
 

@@ -2,7 +2,7 @@ class Deck < ActiveRecord::Base
   belongs_to :user
   has_many :cards, :order => :position, :dependent => :destroy
   
-  attr_accessible :name
+  attr_accessor :name
   
   validates :name, :presence => true
   

@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
   has_many :decks, :dependent => :destroy
   
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: {message: "cannot be blank"}, :uniqueness => true, :format => {:with => VALID_EMAIL_REGEX }
+  
   has_secure_password
-  
-  attr_accessible :email, :password, :password_confirmation
-  
-  validates :email, presence: {message: "cannot be blank"}, :uniqueness => true, :format => {:with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
   validates :password, presence: {message: "cannot be blank"}, :on => :create
   
   after_create :build_reg_hash
