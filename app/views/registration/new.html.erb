@@ -1,0 +1,33 @@
+<h1>Register</h1>
+
+<p><%= alert %></p>
+
+<%= form_tag registration_index_path do %>
+	<% if @user.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@user.errors.count, "error") %> prohibited your account from being saved:</h2>
+
+	    <ul>
+	    <% @user.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	
+	<p>
+		<%= label_tag :email %>
+		<%= text_field_tag :email, params[:email] %>
+	</p>
+	<p>
+		<%= label_tag :password %>
+		<%= password_field_tag :password %>
+	</p>
+	<p>
+		<%= label_tag :password_confirmation %>
+		<%= password_field_tag :password_confirmation %>
+	</p>
+	<p>
+		<%= submit_tag 'Register', {id: 'action_button'} %>
+	</p>
+<% end %>

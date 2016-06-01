@@ -1,0 +1,124 @@
+@import "mixins";
+
+#home_index {
+	font-size: 1.5em;
+	text-align: center;
+	margin-top: 58px;
+	
+	header {
+		h1 {
+			font-family: 'BloklettersBalpen', helvetica;
+			line-height: 40px;
+		}
+	}
+	
+	header#main {
+		display: none;
+	}
+	
+	footer#main {
+		display: none;
+	}
+	
+	#session_links {
+		display: none;
+	}
+	
+	#content {
+		float: none;
+		margin: 0 auto;
+		width: 50%;
+	}
+	
+	
+	div.flash_msg {
+		.narrow {
+			.content {
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+	
+	
+	// ------------------------
+	// No Javascript Warning
+	//
+	
+	#noscript {
+		display: block;
+		margin: 50px;
+	}
+	
+	
+	// ------------------------
+	// home page login/registration form
+	//
+	
+	form {
+		display: none; //don't show the form unless javascript is there to enable it
+		border: 1px solid #444;
+		padding: 1em;
+		background-color: #fff;
+		
+		@include border-radius( 5px );
+		
+		input[type=submit] {
+			font-size: 1.2em;
+		}
+		
+		label[for=email] {
+			display: none;
+		}
+		
+		label[for=password], label[for=password_confirmation] {
+			display: block;
+		}
+		
+		#additional_fields {
+			min-height: 45px;
+		}
+	}
+	
+	
+	
+	// ------------------------
+	// control panel with ribbon
+	//
+
+	section#control_panel {
+		position: static;
+		float: none;
+		margin: 0 auto;
+		top: 0px;
+		width: 50%;
+
+		h1 {
+			display: none;
+		}
+
+		nav#ribbon {	
+			margin-top: 5px;
+			border-top: 1px solid #000;
+			background-image: -moz-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+			background-image: -webkit-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+			background-image: -o-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+			background-image: -ms-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+			background-image: radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+
+			ul {
+
+				li {
+
+					a {
+						color: #fff;
+					}
+				}
+
+				li.about_us, li.contact_us, li.home_link, li.copyright {
+					display: block;
+				}
+			}
+		}
+	} //end control_panel
+} //end #home_index

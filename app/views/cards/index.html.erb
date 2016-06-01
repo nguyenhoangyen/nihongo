@@ -1,0 +1,43 @@
+<%# cards index %>
+
+<%= content_for :page_header do %>
+	<h1><span id="card_count"><%= @deck.cards.count %></span> Card Deck</h1>
+	<%= link_to "Back to Decks", decks_path %>
+<% end %>
+
+<%= content_for :ribbon_links do %>
+	<li>
+		<h2>
+			<span class="rest-in-place" data-url="<%= deck_path(@deck) %>" data-object="deck" data-attribute="name">
+				<%= @deck.name %>
+			</span>
+		</h2>
+	</li>
+	<% if @deck.cards.count > 0 %>
+		<li><%= link_to 'Play this Deck', deck_card_path(@deck, @deck.cards.first) %></li>
+	<% end %>
+	<li><%= link_to 'Add a New Card', new_deck_card_path(@deck) %></li>
+	<li><%= link_to 'Reorder Deck', deck_reorder_path(@deck) %></li>
+	<li class="destroy"><%= link_to 'Destroy this Deck', deck_path(@deck), method: :delete, confirm: "Are you sure? This cannot be undone." %></li>
+<% end %>
+
+<ol class="cards">
+	<% @cards.each do |card| %>
+		<%= render card %>
+	<% end %>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

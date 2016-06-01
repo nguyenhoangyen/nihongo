@@ -1,0 +1,18 @@
+<%# decks index %>
+
+<%= content_for :page_header do %>
+	<h1>Your Decks</h1>
+<% end %>
+
+<%= content_for :ribbon_links do %>
+	<li><%= link_to 'New Deck', new_deck_path %></li>
+<% end %>
+
+<ol class="decks">
+	<% @decks.each do |deck| %>
+		<li>
+			<%= link_to '', deck_cards_path(deck), class: "manage" %>
+			<%= render deck %>
+		</li>
+	<% end %>
+</ol>

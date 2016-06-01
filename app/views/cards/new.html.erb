@@ -1,0 +1,11 @@
+<%= content_for :page_header do %>
+	<h1>New card for "<%= @deck.name %>"</h1>
+<% end %>
+
+<%= content_for :ribbon_links do %>
+	<li><%= link_to 'Done', deck_cards_path(@deck) %></li>
+<% end %>
+
+<%= render 'form' %>
+
+<ol id="new_cards" class="cards"></ol>

@@ -1,0 +1,426 @@
+/*
+ *= require_self
+ *= require_tree .
+*/
+
+@import 'mixins';
+
+$card_size: 100px;
+
+
+
+// ------------------------
+// body
+//
+
+body {
+	margin: 0;
+	background-image: url(square_bg.png);
+}
+
+
+// ------------------------
+// general styles
+//
+
+a {
+	text-decoration: none;
+}
+
+
+
+// ------------------------
+// layout containers
+//
+
+.narrow {
+	@include debug_border;
+	width: 75%;
+	margin: 0 auto;
+	@include clearfix;
+}
+
+#content {
+	@include debug_border;
+	width: 66%;
+	float: left;
+	@include clearfix;
+}
+
+#control_panel {
+	@include debug_border;
+	width: 33%;
+}
+
+footer#main {
+	.narrow {
+		margin-top: 20px;
+		padding: 20px;
+		min-height: 100px;
+		border-top: 1px solid #ddd;
+		background-image: -moz-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+		background-image: -webkit-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+		background-image: -o-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+		background-image: -ms-radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);
+		background-image: radial-gradient(50% 0%, ellipse cover, rgba(224, 224, 224, 0.5), rgba(255, 255, 255, 0.0) 100%);	
+	}
+	
+	.about_us, .contact_us {
+		float: right;
+		padding-left: 20px;
+	}
+}
+
+
+// ---------------------
+// flash messages
+//
+
+div.flash_msg {
+//	position: absolute;
+	z-index: 9;
+	width: 100%;
+	padding: 10px 0;
+	display: none;
+	color: #fff;
+	border-bottom: 1px solid #ddd;
+	background-color: #eee;
+	
+	img {
+		float: left;
+		position: relative;
+		left: -80px;
+		top: -25px;
+	}
+	
+	.narrow {
+		.content {
+			width: 60%;
+			font-weight: bold;
+			line-height: 45px;
+		}
+	}
+	
+	&#notice {
+		color: #060;
+	}
+	
+	&#alert {
+		color: #900;
+	}
+}
+
+
+// ------------------------
+// page header
+//
+
+header#main {
+	background-color: #000;
+	background-image: url(dark_dotted.png);
+	padding: 15px 0;
+	
+	h1 {
+		color: #fff;
+		line-height: 30px;
+	}	
+}
+
+
+
+// ------------------------
+// card and deck styles
+//
+
+.big_card {
+	background-color: #fff;
+	float: left;
+	border: 1px solid #000;
+	width: 280px;
+	height: 280px;
+	font-family: 'BloklettersBalpen';
+	font-size: 4em;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.35);
+	margin: 20px 0;
+	padding: 20px;
+
+	.content {
+		@include debug_border;
+
+		text-align: center;
+		display: table-cell;
+		vertical-align: middle;
+		line-height: 35px;
+
+		width: 280px;
+		height: 280px;
+	}
+}
+
+
+ol.decks, ol.cards {
+	list-style: none;
+	padding: 0;
+	
+	li {
+		background-color: #fff;
+		margin: 20px 40px 20px 0px;
+		padding: 20px;
+		float: left;
+		width: $card_size;
+		height: $card_size;
+
+		border: 1px solid #000;
+		font-family: 'BloklettersPotlood';
+		font-size: 2em;
+		text-align: center;
+		
+		.content {
+			position: relative;
+			top: -35px;
+			padding-top: 5px;
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 35px;
+
+			width: $card_size;
+			height: $card_size;		
+			
+			.sub {
+				font-size: .6em;
+			}
+		}
+		
+		a.manage {
+			@include debug_border;
+
+			display: block;
+			width: 32px;
+			height: 32px;
+			
+			position: relative;
+			top: -35px;
+			left: -35px;
+		}
+	}
+} // end ol.decks, ol.cards
+
+ol.decks {
+	li {			  
+		box-shadow: 2px 2px 1px rgba(0,0,0,0.25), /* main shadow */ 
+			10px 10px 0 -5px #fff,                  /* 2nd card layer */ 
+			10px 10px 1px -4px rgba(0,0,0,0.35),    /* 2nd card shadow */ 
+			20px 20px 0 -10px #fff,                 /* 3rd card layer */ 
+			20px 20px 1px -9px rgba(0,0,0,0.35);    /* 3rd card shadow */ 
+	
+		a.manage {
+			background-image: url( cog_32.png );
+		}
+	}
+}
+
+ol.cards {
+	li {
+		box-shadow: 5px 5px 10px rgba(0,0,0,0.35);
+				
+		a.manage {
+			background-image: url( x_32.png );
+		}
+	}
+}
+
+
+// ------------------------
+// reorder cards table
+//
+
+table.cards {
+	margin-top: 20px;
+	width: 90%;
+	
+	td {
+		font-family: 'BloklettersPotlood';
+		font-size: 2em;
+		
+		padding: 15px 20px 10px 20px;
+		
+		&:first-child {
+			border: 1px solid #444;
+		}		
+	}
+}
+
+
+// ------------------------
+// arrow link styles (cards show)
+//
+
+.arrow_links {
+	float: left;
+	width: 64px;
+	height: 64px;
+	position: relative;
+	top: 138px;
+	margin: 0 15px;
+}
+
+.next {
+	background-image: url( right_arrow_64.png );
+	margin-right: 0;
+}
+
+.prev {
+	background-image: url( left_arrow_64.png );
+	margin-left: 0;
+}
+
+span.next {
+	background-image: url( right_arrow_64_disabled.png );
+}
+
+span.prev {
+	background-image: url( left_arrow_64_disabled.png );
+}
+
+
+
+// ------------------------
+// form styles
+//
+
+form {
+	margin: 20px 0;
+	
+	input[type=text], input[type=email], input[type=password] {
+		font-size: 1.5em;
+		padding: 5px 10px;
+
+		@include border-radius( 5px );
+	}	
+	
+	label[for=deck_name], label[for=card_content] {
+		display: none;
+	}
+	
+	input[type="submit"] {
+		font-size: 1.2em;
+		background-color: #900;
+		color: #fff;
+		border: 1px solid #600;
+		padding: 7px 15px;
+		@include border-radius( 3px );
+		
+		&:hover {
+			background-color: #a00;
+			border: 1px solid #900;
+		}
+	}
+} //end form
+
+
+// ------------------------
+// rest-in-place forms
+//
+ 
+li {
+	form {
+		margin: 0;
+		
+		input[type=text] {
+			text-align: center;
+			font-size: 1em;
+			width: 80%;
+		}
+	}
+}
+
+
+// ------------------------
+// control panel with ribbon
+//
+
+section#control_panel {
+	z-index: 10;
+	width: 25%;
+	float: right;
+	text-align: center;
+	position: absolute;
+	right: 12.5%;
+	top: 20px;
+	
+	nav#session_links {
+		margin-bottom: 20px;
+
+		a {
+			color: #fff;
+		}
+	}
+	
+	h1 {
+		font-family: 'BloklettersBalpen', helvetica;
+		margin: 0;
+		padding: 0;
+		color: #fff;
+	}
+	
+	h2 {
+		line-height: 25px;
+	}
+	
+	nav#ribbon {	
+		margin-top: 5px;
+		border-top: 1px solid #aaa;
+	
+		ul {
+			
+			margin: 0 auto;
+			padding: 0;
+			list-style: none;
+			width: 72%;
+		
+			li {
+				@include debug_border;
+				background-color: #900;
+				padding: 20px 20px 10px 20px;
+			
+				a {
+					text-shadow: 0px -1px 0px #000;
+					color: #fff;
+				}
+				
+				h2 {
+					color: #fff;
+				}
+				
+				&.destroy a {
+					display: block;
+					padding: 4px 8px;
+					background-color: #c00;
+					border: 1px solid #700;
+					@include border_radius( 3px );
+					
+					&:hover {
+						background-color: #d00;
+					}
+				}
+				
+				&.about_us, &.contact_us, &.home_link, &.copyright {
+					display: none;
+				}
+				
+				&.copyright {
+					color: #999;
+				}
+
+				&#end {
+					background-color: transparent;
+					background-image: url(ribbon_end.png);
+					background-repeat: no-repeat;
+					min-height: 140px;
+					background-size: 100%;
+				}
+			}
+		}
+	}
+} //end control_panel
